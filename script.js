@@ -79,7 +79,7 @@ form_3_next_btn.addEventListener("click", function(){
 });
 
 form_4_back_btn.addEventListener("click", function(){
-	form_3.style.display = "block";
+	form_3.style.display = "grid";
 	form_4.style.display = "none";
 
 	form_4_btns.style.display = "none";

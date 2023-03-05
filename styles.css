@@ -5,7 +5,7 @@
     --font-size-button: 1.125em;
     
     /* Colors */
-    --body-color: #f6f6f6;
+    --body-color: #f8f8f8;
     --main-color: #c0eb75;
     --main-color-hovered: #e1ffad;
     --secondary-color: #d6d6d6;
@@ -243,6 +243,7 @@ header {
 /* =============== FORMS SECTION =============== */
 .forms-section {
     flex: 1 1 auto;
+    flex: 1 1 0;
     height: 100%;
     overflow: hidden;
 }
@@ -574,23 +575,59 @@ header {
 .form-4-table input:focus {
     border: 2px solid var(--main-color);   
 }
+/* Always show the scrollbar of the dropdown */
+.form-4-table::-webkit-scrollbar {
+    height: 8px;
+}
 
+.form-4-table::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,.2);
+    border-radius: 8px;
+}
+
+.form-4-table::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0,0,0,.3);
+}
 
 
 
 
 /* RESULTS */
-.form_5 h2 {
-    font-size: 28px;
-    margin-bottom: 30px;
+.result {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #fff;
+    padding: 2rem 1rem;
+    border-radius: 10px;
+    width: auto;
 }
-.form_5 h2 span {
+.result-icon {
+    padding: 1rem;
+}
+.result-icon i {
+    font-size: 48px;
+    width: fit-content;
+    padding: 0.25rem 0.5rem;
+    background-color: var(--main-color);
+    border-radius: 50%;
+}
+.result-text {
+    padding-left: 1rem;
+}
+.result-text h2 {
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+.result-text h2 span {
     display: inline-block;
     padding: 0 0.3em;
     position: relative;
     z-index: 0;
 }
-.form_5 h2 span svg {
+.result-text h2 span svg {
     position: absolute;
     z-index: -1;
     top: -4px;
@@ -601,6 +638,11 @@ header {
     height: 40px;
     fill: var(--main-color);
 }
-.form_5 p {
+.result-text p {
     font-size: 18px;
+}
+.recap h3 {
+    margin-top: 4rem;
+    font-weight: 600;
+    /* text-decoration: underline; */
 }
