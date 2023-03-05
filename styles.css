@@ -6,8 +6,9 @@
     
     /* Colors */
     --body-color: #f8f8f8;
+    /* --body-color: rgb(243 244 246); */ /* Proposition */
     --main-color: #c0eb75;
-    --main-color-hovered: #e1ffad;
+    --main-color-hovered: #cefa82;
     --secondary-color: #d6d6d6;
     --secondary-color-hovered: #bfc0c0;
     --text-color: #1d1d1f;
@@ -258,7 +259,7 @@ header {
 }
 .forms .form {
     display: none;
-    padding: 80px 160px 80px 80px;
+    padding: 80px 2rem 80px 80px;
     height: 100vh;
     overflow: scroll;
 }
@@ -266,7 +267,9 @@ header {
     display: block;
 }
 .forms .form_3 {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 0.5fr 1fr;
+    row-gap: 0;
+    column-gap: 1rem;
 }
 .form .form_3::-webkit-scrollbar {
     width: 0;
@@ -531,6 +534,7 @@ header {
     font-size: 15px;
     font-family: sans-serif;
     overflow-x: scroll;
+    white-space: nowrap;
 }
 .form-4-table thead tr {
     background-color: var(--main-color);
@@ -645,4 +649,14 @@ header {
     margin-top: 4rem;
     font-weight: 600;
     /* text-decoration: underline; */
+}
+
+
+
+
+
+
+/* MEDIA QUERIES */
+@media screen and (max-width: 991px) {
+    
 }
