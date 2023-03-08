@@ -50,7 +50,7 @@ form_2_back_btn.addEventListener("click", function(){
 
 form_2_next_btn.addEventListener("click", function(){
 	form_2.style.display = "none";
-	form_3.style.display = "grid";
+	form_3.style.display = "block";
 
 	form_3_btns.style.display = "flex";
 	form_2_btns.style.display = "none";
@@ -79,7 +79,7 @@ form_3_next_btn.addEventListener("click", function(){
 });
 
 form_4_back_btn.addEventListener("click", function(){
-	form_3.style.display = "grid";
+	form_3.style.display = "block";
 	form_4.style.display = "none";
 
 	form_4_btns.style.display = "none";
@@ -447,3 +447,53 @@ vegetableItems.forEach((item) => {
     }
   });
 });
+
+
+
+
+
+
+
+
+// To Store in local storage the text inputs
+const textInputs = document.querySelectorAll('input[type="text"]');
+
+// Add an event listener to each text input element
+textInputs.forEach(input => {
+  input.addEventListener('input', () => {
+    // Get the input name and value
+    const inputName = input.getAttribute('name');
+    const inputValue = input.value;
+
+    // Store the input value in local storage using the input name as the key
+    localStorage.setItem(inputName, inputValue);
+  });
+});
+
+// Get all clickable-label elements on the page
+const radios = document.querySelectorAll('.clickable-label');
+
+// Add an event listener to each clickable-label element
+radios.forEach(label => {
+  label.addEventListener('click', () => {
+    // Check if the label has the "active" class
+    if (label.classList.contains('active')) {
+      // Get the label name and value
+      const labelName = label.getAttribute('name');
+      const labelValue = label.innerText;
+
+      // Store the label value in local storage using the label name as the key
+      localStorage.setItem(labelName, labelValue);
+
+      // Get the corresponding radio input element
+      const radioInput = document.querySelector(`input[type="radio"][name="${labelName}"]`);
+
+      // If a radio input element exists, store its value in local storage using the same key as the label
+      if (radioInput) {
+        const radioValue = radioInput.value;
+        localStorage.setItem(labelName, radioValue);
+      }
+    }
+  });
+});
+  
