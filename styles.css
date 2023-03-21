@@ -433,7 +433,7 @@ header {
 }
 .select-btn {
     display: flex;
-    height: 50px;
+    height: 55px;
     align-items: center;
     justify-content: space-between;
     padding: 0 16px;
@@ -475,12 +475,13 @@ header {
 .select-btn.open ~ .dropdown-items {
     display: block;
     /* max-height: 232px; */
-    max-height: 234px;
+    max-height: 230px;
     overflow: scroll;
 }
 /* Always show the scrollbar of the dropdown */
 .select-btn.open ~ .dropdown-items::-webkit-scrollbar {
     width: 8px;
+    height: 0;
 }
 
 .select-btn.open ~ .dropdown-items::-webkit-scrollbar-thumb {
@@ -495,15 +496,20 @@ header {
 .dropdown-items .dropdown-item {
     display: flex;
     align-items: center;
-    height: 50px;
+    min-height: 50px;
     cursor: pointer;
     transition: 300ms all linear;
-    padding: 0 15px;
+    padding: 10px 15px;
     border-radius: 8px;
+    word-break: break-word;
 }
 .dropdown-items .dropdown-item:hover {
     background-color: var(--progressbar-next);
 }
+.dropdown-items .dropdown-item:last-of-type {
+    margin-bottom: 1rem;
+}
+
 .dropdown-items .dropdown-item .dropdown-checkbox {
     display: flex;
     align-items: center;
