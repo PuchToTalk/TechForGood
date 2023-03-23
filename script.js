@@ -497,3 +497,32 @@ radios.forEach(label => {
   });
 });
   
+
+
+
+
+// Hide and display no bio phytos in dropdowns
+document.addEventListener('click', event => {
+  const bioDropdown = document.querySelector('.bio');
+  const ouiLabel = bioDropdown.querySelector('label.clickable-label:first-of-type');
+  const dropdownItems = document.querySelectorAll('.form_3 .dropdown-items .dropdown-item');
+
+  if (event.target.closest('.bio') === bioDropdown) {
+    if (ouiLabel.classList.contains('active')) {
+      dropdownItems.forEach(item => {
+        if (item.classList.contains('phyto-bio')) {
+          item.style.display = 'flex';
+          item.closest('.dropdown').style.display = 'block'; // show parent dropdown if phyto-bio item is displayed
+        } else {
+          item.style.display = 'none';
+          item.closest('.dropdown').style.display = 'none'; // hide parent dropdown if no phyto-bio item is displayed
+        }
+      });
+    } else {
+      dropdownItems.forEach(item => {
+        item.style.display = 'flex';
+        item.closest('.dropdown').style.display = 'block'; // show parent dropdown if any item is displayed
+      });
+    }
+  }
+});
