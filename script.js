@@ -9,7 +9,7 @@ var form_1_btns = document.querySelector(".form_1_btns");
 var form_2_btns = document.querySelector(".form_2_btns");
 var form_3_btns = document.querySelector(".form_3_btns");
 var form_4_btns = document.querySelector(".form_4_btns");
-var form_5_btns = document.querySelector(".form_5_btns");
+// var form_5_btns = document.querySelector(".form_5_btns");
 
 
 var form_1_next_btn = document.querySelector(".form_1_btns .btn_next");
@@ -19,8 +19,8 @@ var form_3_back_btn = document.querySelector(".form_3_btns .btn_back");
 var form_3_next_btn = document.querySelector(".form_3_btns .btn_next");
 var form_4_back_btn = document.querySelector(".form_4_btns .btn_back");
 var form_4_next_btn = document.querySelector(".form_4_btns .btn_next");
-var form_5_back_btn = document.querySelector(".form_5_btns .btn_back");
-var form_5_done_btn = document.querySelector(".btn_done");
+// var form_5_back_btn = document.querySelector(".form_5_btns .btn_back");
+// var form_5_done_btn = document.querySelector(".btn_done");
 
 var form_2_progressbar = document.querySelector(".form_2_progressbar");
 var form_3_progressbar = document.querySelector(".form_3_progressbar");
@@ -92,21 +92,21 @@ form_4_next_btn.addEventListener("click", function(){
 	form_4.style.display = "none";
 	form_5.style.display = "block";
 
-	form_5_btns.style.display = "flex";
+	// form_5_btns.style.display = "flex";
 	form_4_btns.style.display = "none";
 
 	form_5_progressbar.classList.add("active");
 });
 
-form_5_back_btn.addEventListener("click", function(){
-	form_4.style.display = "block";
-	form_5.style.display = "none";
+// form_5_back_btn.addEventListener("click", function(){
+// 	form_4.style.display = "block";
+// 	form_5.style.display = "none";
 
-	form_5_btns.style.display = "none";
-	form_4_btns.style.display = "flex";
+// 	form_5_btns.style.display = "none";
+// 	form_4_btns.style.display = "flex";
 
-	form_5_progressbar.classList.remove("active");
-});
+// 	form_5_progressbar.classList.remove("active");
+// });
 
 
 
@@ -163,6 +163,7 @@ clickableLabels.forEach(label => {
   label.addEventListener('click', () => {
     const input = label.previousElementSibling;
     input.checked = true;
+    console.log("checked");
   });
 });
 
