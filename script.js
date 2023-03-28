@@ -27,6 +27,12 @@ var form_3_progressbar = document.querySelector(".form_3_progressbar");
 var form_4_progressbar = document.querySelector(".form_4_progressbar");
 var form_5_progressbar = document.querySelector(".form_5_progressbar");
 
+var mobile_form_1_progressbar = document.querySelector(".mobile_form_1_progressbar");
+var mobile_form_2_progressbar = document.querySelector(".mobile_form_2_progressbar");
+var mobile_form_3_progressbar = document.querySelector(".mobile_form_3_progressbar");
+var mobile_form_4_progressbar = document.querySelector(".mobile_form_4_progressbar");
+var mobile_form_5_progressbar = document.querySelector(".mobile_form_5_progressbar");
+
 
 form_1_next_btn.addEventListener("click", function(){
 	form_1.style.display = "none";
@@ -36,6 +42,8 @@ form_1_next_btn.addEventListener("click", function(){
 	form_2_btns.style.display = "flex";
 
 	form_2_progressbar.classList.add("active");
+  mobile_form_1_progressbar.classList.remove("active");
+  mobile_form_2_progressbar.classList.add("active");
 });
 
 form_2_back_btn.addEventListener("click", function(){
@@ -46,6 +54,8 @@ form_2_back_btn.addEventListener("click", function(){
 	form_2_btns.style.display = "none";
 
 	form_2_progressbar.classList.remove("active");
+  mobile_form_1_progressbar.classList.add("active");
+  mobile_form_2_progressbar.classList.remove("active");
 });
 
 form_2_next_btn.addEventListener("click", function(){
@@ -56,6 +66,8 @@ form_2_next_btn.addEventListener("click", function(){
 	form_2_btns.style.display = "none";
 
 	form_3_progressbar.classList.add("active");
+  mobile_form_2_progressbar.classList.remove("active");
+  mobile_form_3_progressbar.classList.add("active");
 });
 
 form_3_back_btn.addEventListener("click", function(){
@@ -66,6 +78,8 @@ form_3_back_btn.addEventListener("click", function(){
 	form_2_btns.style.display = "flex";
 
 	form_3_progressbar.classList.remove("active");
+  mobile_form_2_progressbar.classList.add("active");
+  mobile_form_3_progressbar.classList.remove("active");
 });
 
 form_3_next_btn.addEventListener("click", function(){
@@ -76,6 +90,8 @@ form_3_next_btn.addEventListener("click", function(){
 	form_3_btns.style.display = "none";
 
 	form_4_progressbar.classList.add("active");
+  mobile_form_3_progressbar.classList.remove("active");
+  mobile_form_4_progressbar.classList.add("active");
 });
 
 form_4_back_btn.addEventListener("click", function(){
@@ -86,6 +102,8 @@ form_4_back_btn.addEventListener("click", function(){
 	form_3_btns.style.display = "flex";
 
 	form_4_progressbar.classList.remove("active");
+  mobile_form_3_progressbar.classList.add("active");
+  mobile_form_4_progressbar.classList.remove("active");
 });
 
 form_4_next_btn.addEventListener("click", function(){
@@ -96,6 +114,8 @@ form_4_next_btn.addEventListener("click", function(){
 	form_4_btns.style.display = "none";
 
 	form_5_progressbar.classList.add("active");
+  mobile_form_4_progressbar.classList.remove("active");
+  mobile_form_5_progressbar.classList.add("active");
 });
 
 // form_5_back_btn.addEventListener("click", function(){
@@ -106,6 +126,8 @@ form_4_next_btn.addEventListener("click", function(){
 // 	form_4_btns.style.display = "flex";
 
 // 	form_5_progressbar.classList.remove("active");
+//   mobile_form_4_progressbar.classList.add("active");
+//   mobile_form_5_progressbar.classList.remove("active");
 // });
 
 
@@ -163,7 +185,6 @@ clickableLabels.forEach(label => {
   label.addEventListener('click', () => {
     const input = label.previousElementSibling;
     input.checked = true;
-    console.log("checked");
   });
 });
 
