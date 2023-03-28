@@ -259,8 +259,8 @@ header {
 }
 .forms .form {
     display: none;
-    padding: 80px 2rem 80px 80px;
-    height: 100vh;
+    padding: 80px 2rem 2rem 80px;
+    height: 100%;
     overflow: scroll;
 }
 .forms .form_1{
@@ -670,9 +670,6 @@ header {
 
 
 
-
-
-
 /* MEDIA QUERIES */
 @media screen and (max-width: 991px) {
     section {
@@ -686,5 +683,7 @@ header {
     .steps-container ul {
         flex-direction: row;
     }
+    .steps-container ul .active:not(last-of-type) {
+        display: none;
+    }    
 }
-
