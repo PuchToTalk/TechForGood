@@ -1,3 +1,17 @@
+document.addEventListener("DOMContentLoaded", function() {
+  const span = document.querySelector(".welcome-container span");
+  const welcomeSection = document.querySelector(".welcome-section");
+  const calculatorSection = document.querySelector(".calculator-section");
+  const body = document.querySelector("body");
+
+  span.addEventListener("click", function() {
+    welcomeSection.classList.add("started");
+    calculatorSection.classList.add("started");
+    body.style.backgroundColor = "var(--body-color)";
+  });
+});
+
+
 var form_1 = document.querySelector(".form_1");
 var form_2 = document.querySelector(".form_2");
 var form_3 = document.querySelector(".form_3");
