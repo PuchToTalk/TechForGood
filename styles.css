@@ -115,6 +115,10 @@ header {
     width: 100%;
 }
 
+.calculator-section {
+    
+}
+
 
 /* =============== BUTTONS =============== */
 .button {
@@ -713,7 +717,7 @@ header {
     .nav-links {
         display: none;
     }
-    section {
+    .calculator-section {
         display: none;
     }
     .no-responsive-text {
