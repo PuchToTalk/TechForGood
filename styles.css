@@ -138,6 +138,7 @@ header {
     text-align: center;
     line-height: 1.35em;
     margin-bottom: 1rem;
+    color: var(--text-color);
 }
 .welcome-container p {
     color: #858585;
