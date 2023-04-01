@@ -145,7 +145,6 @@ form_4_next_btn.addEventListener("click", function(){
 // });
 
 
-
 // To open and close the dropdown
 const selectBtns = document.querySelectorAll(".select-btn"),
 	  dropdownItems = document.querySelectorAll(".dropdown-item");
@@ -170,7 +169,6 @@ document.addEventListener("click", (event) => {
 		}
 	}
 });
-
 
 
 //To check options inside dropdown
