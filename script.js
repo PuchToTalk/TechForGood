@@ -16,6 +16,7 @@ var form_1 = document.querySelector(".form_1");
 var form_2 = document.querySelector(".form_2");
 var form_3 = document.querySelector(".form_3");
 var form_4 = document.querySelector(".form_4");
+var alert_box_screen = document.querySelector(".alert-box-screen");
 var form_5 = document.querySelector(".form_5");
 
 
@@ -33,6 +34,8 @@ var form_3_back_btn = document.querySelector(".form_3_btns .btn_back");
 var form_3_next_btn = document.querySelector(".form_3_btns .btn_next");
 var form_4_back_btn = document.querySelector(".form_4_btns .btn_back");
 var form_4_next_btn = document.querySelector(".form_4_btns .btn_next");
+var cancel_form_btn = document.querySelector(".cancel_form_btn");
+var send_form_btn = document.querySelector(".send_form_btn");
 // var form_5_back_btn = document.querySelector(".form_5_btns .btn_back");
 // var form_5_done_btn = document.querySelector(".btn_done");
 
@@ -41,11 +44,11 @@ var form_3_progressbar = document.querySelector(".form_3_progressbar");
 var form_4_progressbar = document.querySelector(".form_4_progressbar");
 var form_5_progressbar = document.querySelector(".form_5_progressbar");
 
-var mobile_form_1_progressbar = document.querySelector(".mobile_form_1_progressbar");
-var mobile_form_2_progressbar = document.querySelector(".mobile_form_2_progressbar");
-var mobile_form_3_progressbar = document.querySelector(".mobile_form_3_progressbar");
-var mobile_form_4_progressbar = document.querySelector(".mobile_form_4_progressbar");
-var mobile_form_5_progressbar = document.querySelector(".mobile_form_5_progressbar");
+// var mobile_form_1_progressbar = document.querySelector(".mobile_form_1_progressbar");
+// var mobile_form_2_progressbar = document.querySelector(".mobile_form_2_progressbar");
+// var mobile_form_3_progressbar = document.querySelector(".mobile_form_3_progressbar");
+// var mobile_form_4_progressbar = document.querySelector(".mobile_form_4_progressbar");
+// var mobile_form_5_progressbar = document.querySelector(".mobile_form_5_progressbar");
 
 
 form_1_next_btn.addEventListener("click", function(){
@@ -121,6 +124,15 @@ form_4_back_btn.addEventListener("click", function(){
 });
 
 form_4_next_btn.addEventListener("click", function(){
+	alert_box_screen.style.display = "grid";
+});
+
+cancel_form_btn.addEventListener("click", function(){
+	alert_box_screen.style.display = "none";
+});
+
+send_form_btn.addEventListener("click", function(){
+  alert_box_screen.style.display = "none";
 	form_4.style.display = "none";
 	form_5.style.display = "block";
 
@@ -316,7 +328,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-// Adds the phytos selected in the form_3 and removes when they are uunselected
+// Adds the phytos selected in the form_3 and removes when they are unselected
 const phytoItems = document.querySelectorAll('.form_3 .dropdown-item');
 const tableHead = document.querySelector('.form-4-table thead tr');
 const tableBody = document.querySelector('.form-4-table tbody');
@@ -376,14 +388,16 @@ phytoItems.forEach(item => {
 
 
 
+document.addEventListener('DOMContentLoaded', () => {
+  const dropdown = document.querySelector('.dropdown');
+  const dropdownItems = dropdown.querySelectorAll('.dropdown-item');
 
-
-
-
-
-
-
-
+  if (dropdown.style.display === 'none') {
+    dropdownItems.forEach(item => {
+      item.classList.remove('dropdown-checked');
+    });
+  }
+});
 
 
 
