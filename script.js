@@ -34,8 +34,8 @@ var form_3_back_btn = document.querySelector(".form_3_btns .btn_back");
 var form_3_next_btn = document.querySelector(".form_3_btns .btn_next");
 var form_4_back_btn = document.querySelector(".form_4_btns .btn_back");
 var form_4_next_btn = document.querySelector(".form_4_btns .btn_next");
-var cancel_form_btn = document.querySelector(".cancel_form_btn");
-var send_form_btn = document.querySelector(".send_form_btn");
+var cancel_form_btn = document.querySelector("#cancel_form_btn");
+var send_form_btn = document.querySelector("#send_form_btn");
 // var form_5_back_btn = document.querySelector(".form_5_btns .btn_back");
 // var form_5_done_btn = document.querySelector(".btn_done");
 
