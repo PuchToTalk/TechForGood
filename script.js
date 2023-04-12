@@ -24,7 +24,6 @@ var form_1_btns = document.querySelector(".form_1_btns");
 var form_2_btns = document.querySelector(".form_2_btns");
 var form_3_btns = document.querySelector(".form_3_btns");
 var form_4_btns = document.querySelector(".form_4_btns");
-// var form_5_btns = document.querySelector(".form_5_btns");
 
 
 var form_1_next_btn = document.querySelector(".form_1_btns .btn_next");
@@ -36,19 +35,11 @@ var form_4_back_btn = document.querySelector(".form_4_btns .btn_back");
 var form_4_next_btn = document.querySelector(".form_4_btns .btn_next");
 var cancel_form_btn = document.querySelector("#cancel_form_btn");
 var send_form_btn = document.querySelector("#send_form_btn");
-// var form_5_back_btn = document.querySelector(".form_5_btns .btn_back");
-// var form_5_done_btn = document.querySelector(".btn_done");
 
 var form_2_progressbar = document.querySelector(".form_2_progressbar");
 var form_3_progressbar = document.querySelector(".form_3_progressbar");
 var form_4_progressbar = document.querySelector(".form_4_progressbar");
 var form_5_progressbar = document.querySelector(".form_5_progressbar");
-
-// var mobile_form_1_progressbar = document.querySelector(".mobile_form_1_progressbar");
-// var mobile_form_2_progressbar = document.querySelector(".mobile_form_2_progressbar");
-// var mobile_form_3_progressbar = document.querySelector(".mobile_form_3_progressbar");
-// var mobile_form_4_progressbar = document.querySelector(".mobile_form_4_progressbar");
-// var mobile_form_5_progressbar = document.querySelector(".mobile_form_5_progressbar");
 
 
 form_1_next_btn.addEventListener("click", function(){
@@ -59,8 +50,6 @@ form_1_next_btn.addEventListener("click", function(){
 	form_2_btns.style.display = "flex";
 
 	form_2_progressbar.classList.add("active");
-  mobile_form_1_progressbar.classList.remove("active");
-  mobile_form_2_progressbar.classList.add("active");
 });
 
 form_2_back_btn.addEventListener("click", function(){
@@ -71,8 +60,6 @@ form_2_back_btn.addEventListener("click", function(){
 	form_2_btns.style.display = "none";
 
 	form_2_progressbar.classList.remove("active");
-  mobile_form_1_progressbar.classList.add("active");
-  mobile_form_2_progressbar.classList.remove("active");
 });
 
 form_2_next_btn.addEventListener("click", function(){
@@ -83,8 +70,6 @@ form_2_next_btn.addEventListener("click", function(){
 	form_2_btns.style.display = "none";
 
 	form_3_progressbar.classList.add("active");
-  mobile_form_2_progressbar.classList.remove("active");
-  mobile_form_3_progressbar.classList.add("active");
 });
 
 form_3_back_btn.addEventListener("click", function(){
@@ -95,8 +80,6 @@ form_3_back_btn.addEventListener("click", function(){
 	form_2_btns.style.display = "flex";
 
 	form_3_progressbar.classList.remove("active");
-  mobile_form_2_progressbar.classList.add("active");
-  mobile_form_3_progressbar.classList.remove("active");
 });
 
 form_3_next_btn.addEventListener("click", function(){
@@ -107,8 +90,6 @@ form_3_next_btn.addEventListener("click", function(){
 	form_3_btns.style.display = "none";
 
 	form_4_progressbar.classList.add("active");
-  mobile_form_3_progressbar.classList.remove("active");
-  mobile_form_4_progressbar.classList.add("active");
 });
 
 form_4_back_btn.addEventListener("click", function(){
@@ -119,8 +100,6 @@ form_4_back_btn.addEventListener("click", function(){
 	form_3_btns.style.display = "flex";
 
 	form_4_progressbar.classList.remove("active");
-  mobile_form_3_progressbar.classList.add("active");
-  mobile_form_4_progressbar.classList.remove("active");
 });
 
 form_4_next_btn.addEventListener("click", function(){
@@ -136,25 +115,10 @@ send_form_btn.addEventListener("click", function(){
 	form_4.style.display = "none";
 	form_5.style.display = "block";
 
-	// form_5_btns.style.display = "flex";
 	form_4_btns.style.display = "none";
 
 	form_5_progressbar.classList.add("active");
-  mobile_form_4_progressbar.classList.remove("active");
-  mobile_form_5_progressbar.classList.add("active");
 });
-
-// form_5_back_btn.addEventListener("click", function(){
-// 	form_4.style.display = "block";
-// 	form_5.style.display = "none";
-
-// 	form_5_btns.style.display = "none";
-// 	form_4_btns.style.display = "flex";
-
-// 	form_5_progressbar.classList.remove("active");
-//   mobile_form_4_progressbar.classList.add("active");
-//   mobile_form_5_progressbar.classList.remove("active");
-// });
 
 
 // To open and close the dropdown
@@ -253,6 +217,40 @@ const numbersInput = document.querySelector('.numbers');
 numbersInput.addEventListener('input', function() {
     this.value = this.value.replace(/[^0-9]/g, '');
 });
+
+
+
+
+
+
+// Hide and display no bio phytos in dropdowns
+document.addEventListener('click', event => {
+  const bioDropdown = document.querySelector('.bio');
+  const ouiLabel = bioDropdown.querySelector('label.clickable-label:first-of-type');
+  const dropdownItems = document.querySelectorAll('.form_3 .dropdown-items .dropdown-item');
+
+  if (event.target.closest('.bio') === bioDropdown) {
+    if (ouiLabel.classList.contains('active')) {
+      dropdownItems.forEach(item => {
+        if (item.classList.contains('phyto-bio')) {
+          item.style.display = 'flex';
+          item.closest('.dropdown').style.display = 'block'; // show parent dropdown if phyto-bio item is displayed
+        } else {
+          item.style.display = 'none';
+          item.closest('.dropdown').style.display = 'none'; // hide parent dropdown if no phyto-bio item is displayed
+        }
+      });
+    } else {
+      dropdownItems.forEach(item => {
+        item.style.display = 'flex';
+        item.closest('.dropdown').style.display = 'block'; // show parent dropdown if any item is displayed
+      });
+    }
+  }
+});
+
+
+
 
 
 
@@ -406,7 +404,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-// SAME AS THE NEXT PART WITHOUT THE ALPHABETICAL SORT
+//SAME AS THE NEXT PART WITHOUT THE ALPHABETICAL SORT
 // const vegetableItems = document.querySelectorAll('.form_4 .dropdown .dropdown-item');
 // const formTableBody = document.querySelector('.form-4-table tbody');
 // const formTableHeaderCells = formTableBody.parentElement.querySelector('thead tr').cells;
@@ -543,34 +541,4 @@ radios.forEach(label => {
       }
     }
   });
-});
-  
-
-
-
-
-// Hide and display no bio phytos in dropdowns
-document.addEventListener('click', event => {
-  const bioDropdown = document.querySelector('.bio');
-  const ouiLabel = bioDropdown.querySelector('label.clickable-label:first-of-type');
-  const dropdownItems = document.querySelectorAll('.form_3 .dropdown-items .dropdown-item');
-
-  if (event.target.closest('.bio') === bioDropdown) {
-    if (ouiLabel.classList.contains('active')) {
-      dropdownItems.forEach(item => {
-        if (item.classList.contains('phyto-bio')) {
-          item.style.display = 'flex';
-          item.closest('.dropdown').style.display = 'block'; // show parent dropdown if phyto-bio item is displayed
-        } else {
-          item.style.display = 'none';
-          item.closest('.dropdown').style.display = 'none'; // hide parent dropdown if no phyto-bio item is displayed
-        }
-      });
-    } else {
-      dropdownItems.forEach(item => {
-        item.style.display = 'flex';
-        item.closest('.dropdown').style.display = 'block'; // show parent dropdown if any item is displayed
-      });
-    }
-  }
 });
