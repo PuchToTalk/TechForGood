@@ -552,10 +552,6 @@ const EM_legume_total_liste = [];
 const EM_final_legume = [];
 
 
-/** à changer / optimiser */
-const nbr_vehicule = 1
-const nbr_livraison = 1
-/** à changer / optimiser */
 
 
 /** Section Page "la Ferme" pour stocker les données local storage */
@@ -567,143 +563,74 @@ btnContinue.addEventListener("click", () => {
 	// stocker les saisies dans le local Storage : format int
 
 	localStorage.setItem("conso_elec_an", document.querySelector('#conso_elec').value);
-  localStorage.setItem("conso_gaz_an", document.querySelector('#conso-gaz').value);
+	localStorage.setItem("conso_gaz_an", document.querySelector('#conso-gaz').value);
 	localStorage.setItem("conso_serres", document.querySelector('#serre_chauffee').value);
 	localStorage.setItem("serre-non-chauffee", document.querySelector('#serre_non_chauffee').value);
 
+	localStorage.setItem("haie", document.querySelector('#dispo_haie').value);
+	localStorage.setItem("foret", document.querySelector('#dispo_foret').value);
 
+	localStorage.setItem("vehicule", document.querySelector('#vehicule_fabrication').value);
+	localStorage.setItem("livraison", document.querySelector('#vehicule_livraison').value);
 
-  let dispoHaies = document.querySelectorAll("input[name = 'dispo-haies']");
-	for (i = 0; i< dispoHaies.length; i++){
-		if (dispoHaies[i].checked === true){
-			haie= dispoHaies[i].value;
-
-		}
-	}
-	localStorage.setItem("haie", haie);
-
-  let dispoForets = document.querySelectorAll("input[name = 'dispo-forets']");
-	for (i = 0; i< dispoForets.length; i++){
-		if (dispoForets[i].checked === true){
-			foret= dispoForets[i].value;
-
-		}
-	}
-	localStorage.setItem("foret", foret);
-
+	
 
 	localStorage.setItem("S_serre", document.querySelector('#S_serre').value);
 	localStorage.setItem("nbr_legume", document.querySelector('#nbr_legume').value);
 
-  localStorage.setItem("S_bache", document.querySelector('#nbre-bache').value);
+  	localStorage.setItem("S_bache", document.querySelector('#S_bache').value);
+	localStorage.setItem("nbr_outils", document.querySelector('#nbr_outils').value);
+	localStorage.setItem("nbr_phyto", document.querySelector('#nbr_phyto').value);
+
+	
 
 
 
 
-
-
-
-
-
-
-
-
-  
-
-	localStorage.setItem("nature-sol", document.querySelector('#nature-sol').value);
-	localStorage.setItem("surface-agricole-totale", document.querySelector('#surface-agricole-totale').value);
-	localStorage.setItem("surface-agricole-utile", document.querySelector('#surface-agricole-utile').value);
-	localStorage.setItem("livraison", document.querySelector('#livraison').value);
 
 	console.log(document.querySelector("#departement").value);
 
 
 
-	// stocker les values ON des cochets
-
-	let chambrefroide = document.querySelectorAll("input[name = 'chambres-froides']");
-	for (i = 0; i< chambrefroide.length; i++){
-		if (chambrefroide[i].checked === true){
-			chambref= chambrefroide[i].value;
-
-		}
-	}
-	localStorage.setItem("chambres-froides", chambref);
-	image.png
-
-	
-	let consogaz = document.querySelectorAll("input[name = 'conso-de-gaz']");
-	for (i = 0; i< consogaz.length; i++){
-		if (consogaz[i].checked === true){
-			biogaz= consogaz[i].value;
-
-		}
-	}
-	localStorage.setItem("biogaz", biogaz);
-	console.log(document.querySelectorAll("input[name = 'conso-de-gaz']"));
-
-
-	let analysesol = document.querySelectorAll("input[name = 'analyse-sol']");
-	for (i = 0; i< analysesol.length; i++){
-		if (analysesol[i].checked === true){
-			anasol= analysesol[i].value;
-
-		}
-	}
-	localStorage.setItem("analyse-sol", anasol);
-
-
-
-	let productionE = document.querySelectorAll("input[name = 'production-energie']");
-	for (i = 0; i< productionE.length; i++){
-		if (productionE[i].checked === true){
-			prodE= productionE[i].value;
-
-		}
-	}
-	localStorage.setItem("production-energie", prodE);
-
-
-
-
-
-
-
-	
-
-	
-	
-	
-
-
-	
-
 })
+
+	let conso_elec_an = localStorage.getItem("conso_elec_an")
+	let conso_gaz_an = localStorage.getItem("conso_gaz_an")
+	let conso_serres = localStorage.getItem("conso_serres")
+	let serre_non_chauffee = localStorage.getItem("serre_non_chauffee")
+	let haie = localStorage.getItem("haie")
+	let foret= localStorage.getItem("foret")
+	let vehicule= localStorage.getItem("vehicule")
+	let livraison= localStorage.getItem("livraison")
+	let S_serre = localStorage.getItem("S_serre")
+	let nbr_legume= localStorage.getItem("br_legume")
+	let S_bache = localStorage.getItem("S_bache")
+	let nbr_outils= localStorage.getItem("nbr_outils")
+	let nbr_phyto= localStorage.getItem("nbr_phyto")
+
+/** à changer / optimiser */
+const nbr_vehicule = 1
+const nbr_livraison = 1
+/** à changer / optimiser */
+
+
+
+
 
 
 function calculFerme(conso_elec_an, conso_gaz_an, serre_chauffee, haie, foret, nbr_vehicule, nbr_livraison) {
-  for (let i = 0; i < parseInt(nbr_vehicule); i++) {
-    let vehicule = prompt("Entrer le nom du véhicule de fabrication: ");
-    vehicule_liste.push(vehicule.toUpperCase());
-  }
+	vehicule_liste.push(vehicule.toUpperCase());
+	livraison_liste.push(livraison.toUpperCase());
 
-  for (let j = 0; j < parseInt(nbr_livraison); j++) {
-    let livraison = prompt("Entrer le nom du véhicule de livraison: ");
-    livraison_liste.push(livraison.toUpperCase());
-  }
-
-  let EM_elec = FE_elec * parseFloat(conso_elec_an);
-  let EM_gaz = FE_gaz * parseFloat(conso_gaz_an);
-  let emission_serre = (serre_chauffee ? val_serre_chauffee : 0);
-  let EM_prod_fabrication = (vehicule_liste.includes("TRACTEUR") ? val_tracteur : 0); // ajouter les autres valeurs en imitant la même méthode
-  let EM_prod_livraison = (livraison_liste.includes("KANGOO") ? val_kangoo : 0); // ajouter les autres valeurs en imitant la même méthode
-  let captage_haie = (haie ? val_haie : 0);
-  let captage_foret = (foret ? val_foret : 0);
-  let total_ferme = EM_elec + EM_gaz + EM_prod_fabrication + EM_prod_livraison + captage_haie + captage_foret;
-
-  console.log(" --- ");
-  console.log(`Le total émission carbone de la ferme donne ${total_ferme} kgeqCO2`);
-  return total_ferme;
+  	let EM_elec = FE_elec * parseFloat(conso_elec_an);
+  	let EM_gaz = FE_gaz * parseFloat(conso_gaz_an);
+  	let emission_serre = (serre_chauffee ? val_serre_chauffee : 0);
+  	let EM_prod_fabrication = (vehicule_liste.includes("TRACTEUR") ? val_tracteur : 0); // ajouter les autres valeurs en imitant la même méthode
+  	let EM_prod_livraison = (livraison_liste.includes("KANGOO") ? val_kangoo : 0); // ajouter les autres valeurs en imitant la même méthode
+  	let captage_haie = (haie ? val_haie : 0);
+  	let captage_foret = (foret ? val_foret : 0);
+  	let total_ferme = EM_elec + EM_gaz + EM_prod_fabrication + EM_prod_livraison + captage_haie + captage_foret;
+  	return total_ferme;
 }
 
 

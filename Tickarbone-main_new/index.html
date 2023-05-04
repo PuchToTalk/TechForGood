@@ -156,25 +156,25 @@
                         <div class="form_1 form">
                             <div class="input-wrap">
                                 <label for="departement" class="question-labels">Consommation électrique par an (en kgeqCO2)</label>
-                                <input type="text" maxlength="5" name="departement" class="question-inputs numbers" id="conso_elec" placeholder="75">
+                                <input type="text" maxlength="5" name="departement" class="question-inputs numbers" id="conso_elec" placeholder="1200">
                             </div>
                             <div class="input-wrap">
                                 <label for="departement" class="question-labels">Entrer la conso gaz par année (en kgeqCO2)</label>
-                                <input type="text" maxlength="5" name="departement" class="question-inputs numbers" id="conso-gaz" placeholder="75">
+                                <input type="text" maxlength="5" name="departement" class="question-inputs numbers" id="conso-gaz" placeholder="500">
                             </div>
               
                             <ul class="radio-wrap">
                                 <label for="" class="question-labels">Disposez-vous de serres chauffées ? Si oui consommation.</label>
                                 <div class="radio-options">
                                     <li>
-                                        <input type="radio" name="serres-chauffees">
+                                        <input type="radio" name="serres-chauffees" value="True">
                                         <label for="" class="clickable-label">Oui</label>
                                         <div class="radio-check">
                                             <div class="radio-check-inside"></div>
                                         </div>
                                     </li>
                                     <li>
-                                        <input type="radio" name="serres-chauffees">
+                                        <input type="radio" name="serres-chauffees" value="False">
                                         <label for="" class="clickable-label">Non</label>
                                         <div class="radio-check">
                                             <div class="radio-check-inside"></div>
@@ -187,34 +187,34 @@
                                 <label for="" class="question-labels">Disposez-vous de serres / tunnels non chauffés ? Si oui type / dimensions.</label>
                                 <div class="radio-options">
                                     <li>
-                                        <input type="radio" name="serres-non-chauffees">
+                                        <input type="radio" name="serres-non-chauffees" value="True">
                                         <label for="" class="clickable-label">Oui</label>
                                         <div class="radio-check">
                                             <div class="radio-check-inside"></div>
                                         </div>
                                     </li>
                                     <li>
-                                        <input type="radio" name="serres-non-chauffees" value="False" id="serre_non_chauffee">
+                                        <input type="radio" name="serres-non-chauffees" value="False">
                                         <label for="" class="clickable-label">Non</label>
                                         <div class="radio-check">
                                             <div class="radio-check-inside"></div>
                                         </div>
                                     </li>
                                 </div>
-                                <input type="text" class="question-inputs radio-inputs" placeholder="75" name="serres-non-chauffees">
+                                <input type="text" class="question-inputs radio-inputs" placeholder="75" name="serres-non-chauffees" id="serre_non_chauffee" >
                             </ul>
                             <ul class="radio-wrap">
                                 <label for="" class="question-labels">Disposez-vous de chambres froides ?</label>
                                 <div class="radio-options">
                                     <li>
-                                        <input type="radio" name="chambres-froides" value="1">
+                                        <input type="radio" name="chambres-froides" value="True">
                                         <label for="" class="clickable-label">Oui</label>
                                         <div class="radio-check">
                                             <div class="radio-check-inside"></div>
                                         </div>
                                     </li>
                                     <li>
-                                        <input type="radio" name="chambres-froides" value="0">
+                                        <input type="radio" name="chambres-froides" value="False">
                                         <label for="" class="clickable-label">Non</label>
                                         <div class="radio-check">
                                             <div class="radio-check-inside"></div>
@@ -227,14 +227,14 @@
                                 <label for="" class="question-labels">Disposez-vous de haies ?</label>
                                 <div class="radio-options">
                                     <li>
-                                        <input type="radio" name="dispo-haies">
+                                        <input type="radio" name="dispo-haies" value="True">
                                         <label for="" class="clickable-label">Oui</label>
                                         <div class="radio-check">
                                             <div class="radio-check-inside"></div>
                                         </div>
                                     </li>
                                     <li>
-                                        <input type="radio" name="dispo-haies">
+                                        <input type="radio" name="dispo-haies" value="False" id="dispo_haie">
                                         <label for="" class="clickable-label">Non</label>
                                         <div class="radio-check">
                                             <div class="radio-check-inside"></div>
@@ -253,7 +253,7 @@
                                         </div>
                                     </li>
                                     <li>
-                                        <input type="radio" name="dispo-forets">
+                                        <input type="radio" name="dispo-forets" value="False" id="dispo_foret">
                                         <label for="" class="clickable-label">Non</label>
                                         <div class="radio-check">
                                             <div class="radio-check-inside"></div>
@@ -262,45 +262,65 @@
                                 </div>
                             </ul>
                             <ul class="radio-wrap">
-                                <label for="" class="question-labels">Disposez-vous d'un ou plusieurs tracteur ? Quel type (conso horaire) ?</label>
+                                <label for="" class="question-labels">Utilisez vous un ou plusieurs véhicule de fabrication ? Entrer le nom du véhicule de fabrication:</label>
                                 <div class="radio-options">
                                     <li>
-                                        <input type="radio" name="tracteurs">
+                                        <input type="radio" name="baches-de-cultures">
                                         <label for="" class="clickable-label">Oui</label>
                                         <div class="radio-check">
                                             <div class="radio-check-inside"></div>
                                         </div>
                                     </li>
                                     <li>
-                                        <input type="radio" name="tracteurs">
+                                        <input type="radio" name="baches-de-cultures">
                                         <label for="" class="clickable-label">Non</label>
                                         <div class="radio-check">
                                             <div class="radio-check-inside"></div>
                                         </div>
                                     </li>
                                 </div>
-                                <input type="text" class="question-inputs radio-inputs" placeholder="75" name="tracteurs">
+                                <input type="text" class="question-inputs radio-inputs" placeholder="TRACTEUR" name="serres-non-chauffees"  id="vehicule_fabrication">
                             </ul>
                             <ul class="radio-wrap">
-                                <label for="" class="question-labels">Disposez-vous d'un véhicule de ferme ? Immat ? Conso au km</label>
+                                <label for="" class="question-labels">Utilisez vous un ou plusieurs véhicule de livraison ? Entrer le nom du véhicule de livraison:</label>
                                 <div class="radio-options">
                                     <li>
-                                        <input type="radio" name="vehicule-de-ferme">
+                                        <input type="radio" name="baches-de-cultures">
                                         <label for="" class="clickable-label">Oui</label>
                                         <div class="radio-check">
                                             <div class="radio-check-inside"></div>
                                         </div>
                                     </li>
                                     <li>
-                                        <input type="radio" name="vehicule-de-ferme">
+                                        <input type="radio" name="baches-de-cultures">
                                         <label for="" class="clickable-label">Non</label>
                                         <div class="radio-check">
                                             <div class="radio-check-inside"></div>
                                         </div>
                                     </li>
                                 </div>
-                                <input type="text" class="question-inputs radio-inputs" placeholder="75" name="vehicule-de-ferme">
+                                <input type="text" class="question-inputs radio-inputs" placeholder="KANGOO" name="serres-non-chauffees" id="vehicule_livraison">
                             </ul>
+                            <div class="input-wrap">
+                                <label for="nature-sol" class="question-labels">Entrer le nombre total de légumes :</label>
+                                <input type="text" name="nature-sol" class="question-inputs" id="nbr_legume" placeholder="2">
+                            </div>
+                            <div class="input-wrap">
+                                <label for="nature-sol" class="question-labels">Entrer la surface de la serre (en m carrée) :</label>
+                                <input type="text" name="nature-sol" class="question-inputs" id="S_serre" placeholder="1000">
+                            </div> 
+                            <div class="input-wrap">
+                                <label for="surface-agricole-totale" class="question-labels">Entrer la surface de la bâche (en m carrée) :</label>
+                                <input type="text" name="surface-agricole-totale" class="question-inputs" id="S_bache" placeholder="525">
+                            </div>
+                            <div class="input-wrap">
+                                <label for="surface-agricole-utile" class="question-labels">Entrer le nombre d'outils (max 2) :</label>
+                                <input type="text" name="surface-agricole-utile" class="question-inputs" id="nbr_outils" placeholder="2">
+                            </div>
+                            <div class="input-wrap">
+                                <label for="surface-agricole-utile" class="question-labels">Entrer le nombre de Phyto au total (max 2) :</label>
+                                <input type="text" name="surface-agricole-utile" class="question-inputs" id="nbr_phyto" placeholder="1">
+                            </div>
                             <ul class="radio-wrap bio">
                                 <label for="" class="question-labels">Êtes-vous en bio ?</label>
                                 <div class="radio-options">
@@ -320,60 +340,7 @@
                                     </li>
                                 </div>
                             </ul>
-                            <ul class="radio-wrap">
-                                <label for="" class="question-labels">Utilisez-vous des bâches de cultures? Si oui, entrer la surface de la bâche (en m carrée) ?</label>
-                                <div class="radio-options">
-                                    <li>
-                                        <input type="radio" name="baches-de-cultures">
-                                        <label for="" class="clickable-label">Oui</label>
-                                        <div class="radio-check">
-                                            <div class="radio-check-inside"></div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <input type="radio" name="baches-de-cultures">
-                                        <label for="" class="clickable-label">Non</label>
-                                        <div class="radio-check">
-                                            <div class="radio-check-inside"></div>
-                                        </div>
-                                    </li>
-                                </div>
-                                <input type="text" class="question-inputs radio-inputs" placeholder="75" name="baches-de-cultures">
-                            </ul>
-                            <div class="input-wrap">
-                                <label for="nature-sol" class="question-labels">Entrer la surface de la serre (en m carrée) :</label>
-                                <input type="text" name="nature-sol" class="question-inputs" id="S_serre" placeholder="75">
-                            </div> <div class="input-wrap">
-                                <label for="nature-sol" class="question-labels">"Entrer le nombre total de légumes : "</label>
-                                <input type="text" name="nature-sol" class="question-inputs" id="nbr_legume" placeholder="75">
-                            </div>
-                            <div class="input-wrap">
-                                <label for="surface-agricole-totale" class="question-labels">Quelle est votre surface agricole totale en ha ?</label>
-                                <input type="text" name="surface-agricole-totale" class="question-inputs" id="surface-agricole-totale" placeholder="75">
-                            </div>
-                            <div class="input-wrap">
-                                <label for="surface-agricole-utile" class="question-labels">Quelle est votre surface agricole utile en ha?</label>
-                                <input type="text" name="surface-agricole-utile" class="question-inputs" id="surface-agricole-utile" placeholder="75">
-                            </div>
-                            <ul class="radio-wrap">
-                                <label for="" class="question-labels">Produisez-vous de l'énergie sur la ferme ? (PV, métha…)</label>
-                                <div class="radio-options">
-                                    <li>
-                                        <input type="radio" name="production-energie">
-                                        <label for="" class="clickable-label">Oui</label>
-                                        <div class="radio-check">
-                                            <div class="radio-check-inside"></div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <input type="radio" name="production-energie">
-                                        <label for="" class="clickable-label">Non</label>
-                                        <div class="radio-check">
-                                            <div class="radio-check-inside"></div>
-                                        </div>
-                                    </li>
-                                </div>
-                            </ul>
+                            
                             <div class="input-wrap">
                                 <label for="livraison" class="question-labels">Comment livrez-vous vos clients?</label>
                                 <input type="text" name="livraison" class="question-inputs" id="livraison" placeholder="Ex: Camion / vehicule léger / Pas de livraison">
