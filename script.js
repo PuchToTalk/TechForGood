@@ -395,6 +395,27 @@ document.addEventListener('DOMContentLoaded', () => {
       item.classList.remove('dropdown-checked');
     });
   }
+
+  function createRow(itemName) {
+	const newRow = formTableBody.insertRow();
+	const firstCell = newRow.insertCell(0);
+	firstCell.textContent = itemName;
+  
+	// Add additional cells with text inputs until the new row has the same number of cells as the header row
+	const numCellsToAdd = formTableHeaderCells.length - 1;
+	const inputValues = []; // Initialize an empty array to store the input values
+	for (let i = 0; i < numCellsToAdd; i++) {
+	  const newCell = newRow.insertCell();
+	  const input = document.createElement('input');
+	  input.type = 'text';
+	  newCell.appendChild(input);
+	  input.addEventListener('change', () => {
+		inputValues[i] = input.value; // Update the inputValues array when the input changes
+		localStorage.setItem(`${itemName}-values`, JSON.stringify(inputValues)); // Save the inputValues array to local storage
+	  });
+	}
+	return newRow;
+  }
 });
 
 
@@ -409,21 +430,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // const formTableBody = document.querySelector('.form-4-table tbody');
 // const formTableHeaderCells = formTableBody.parentElement.querySelector('thead tr').cells;
 
-// function createRow(itemName) {
-//   const newRow = formTableBody.insertRow();
-//   const firstCell = newRow.insertCell(0);
-//   firstCell.textContent = itemName;
 
-//   // Add additional cells with text inputs until the new row has the same number of cells as the header row
-//   const numCellsToAdd = formTableHeaderCells.length - 1;
-//   for (let i = 0; i < numCellsToAdd; i++) {
-//     const newCell = newRow.insertCell();
-//     const input = document.createElement('input');
-//     input.type = 'text';
-//     newCell.appendChild(input);
-//   }
-//   return newRow;
-// }
 
 // vegetableItems.forEach((item) => {
 //   item.addEventListener('click', () => {
@@ -457,11 +464,16 @@ function createRow(itemName) {
 
   // Add additional cells with text inputs until the new row has the same number of cells as the header row
   const numCellsToAdd = formTableHeaderCells.length - 1;
+  const inputValues = []; // Initialize an empty array to store the input values
   for (let i = 0; i < numCellsToAdd; i++) {
     const newCell = newRow.insertCell();
     const input = document.createElement('input');
     input.type = 'text';
     newCell.appendChild(input);
+    input.addEventListener('change', () => {
+      inputValues[i] = input.value; // Update the inputValues array when the input changes
+      localStorage.setItem(`${itemName}-values`, JSON.stringify(inputValues)); // Save the inputValues array to local storage
+    });
   }
   return newRow;
 }
@@ -477,6 +489,17 @@ function sortTable() {
     formTableBody.appendChild(row);
   });
 }
+
+// Add event listener to table body for "change" event on input elements
+formTableBody.addEventListener('change', (event) => {
+  const input = event.target;
+  if (input.tagName === 'INPUT') {
+    const row = input.closest('tr');
+    const itemName = row.cells[0].textContent;
+    const inputValues = Array.from(row.querySelectorAll('input')).map((input) => input.value);
+    localStorage.setItem(`${itemName}-values`, JSON.stringify(inputValues)); // Save the inputValues array to local storage
+  }
+});
 
 vegetableItems.forEach((item) => {
   item.addEventListener('click', () => {
@@ -496,49 +519,270 @@ vegetableItems.forEach((item) => {
 
 
 
+// Valeurs fixes
+
+const FE_elec = 0.06;
+const FE_gaz = 0.244;
+let val_serre_chauffee = 0; // à compléter
+let val_haie = 0; // à compléter
+let val_foret = 0; // à compléter
+const val_tracteur = 5000 / 10;
+const val_kangoo = 6000 / 10;
+
+const FE_serre_an = 9.96;
+const Amort_serre_an = 20.0;
+
+const FE_bache_an = 2.7;
+const Amort_bache_an = 1.0;
+
+
+const val_whisper = 1.3;
+
+const gazole = 0.84; // en kg/L
+const emission_gazole = 2.3; // en kgeqCO2 / kg
+
+// Initialisation nouvelles variables
+const liste_phyto = [];
+const valeur_phyto = [];
+const EM_phyto_liste = [];
+const liste_legume_phyto_nul = [];
+
+const vehicule_liste = [];
+const livraison_liste = [];
+const legume_liste = [];
+const EM_serre_legume = [];
+const CR_serre = [];
+const surface_liste = [];
+const s_bache_liste = [];
+const CR_bache = [];
+const EM_bache_legume = [];
+const outils_liste = [];
+const duree_outils_liste = [];
+const conso_outils_liste = [];
+const EM_outils = [];
+const EM_outils_legumes = [];
+const Ttot_outil_liste = [];
+const CR_outil_liste = [];
+
+const conso_livraison_liste = [];
+const Mprod_liste = [];
+const EM_livraison_liste = [];
+const CR_livraison_liste = [];
+const EM_legume_liste = [];
+
+const EM_ferme_legume_liste = [];
+
+const EM_legume_total_liste = [];
+const EM_final_legume = [];
+
+
+
+
+/** Section Page "la Ferme" pour stocker les données local storage */
+
+let btnContinue = document.querySelector("button");
+console.log(btnContinue);
+
+btnContinue.addEventListener("click", () => {
+	// stocker les saisies dans le local Storage : format int
+
+	localStorage.setItem("conso_elec_an", document.querySelector('#conso_elec').value);
+	localStorage.setItem("conso_gaz_an", document.querySelector('#conso-gaz').value);
+	localStorage.setItem("conso_serres", document.querySelector('#serre_chauffee').value);
+	localStorage.setItem("serre-non-chauffee", document.querySelector('#serre_non_chauffee').value);
+
+	localStorage.setItem("haie", document.querySelector('#dispo_haie').value);
+	localStorage.setItem("foret", document.querySelector('#dispo_foret').value);
+
+	localStorage.setItem("vehicule", document.querySelector('#vehicule_fabrication').value);
+	localStorage.setItem("livraison", document.querySelector('#vehicule_livraison').value);
+
+	
+
+	localStorage.setItem("S_serre", document.querySelector('#S_serre').value);
+	localStorage.setItem("nbr_legume", document.querySelector('#nbr_legume').value);
+
+  	localStorage.setItem("S_bache", document.querySelector('#S_bache').value);
+	localStorage.setItem("nbr_outils", document.querySelector('#nbr_outils').value);
+	localStorage.setItem("nbr_phyto", document.querySelector('#nbr_phyto').value);
+
+	
+
+
+
+})
+
+	let conso_elec_an = localStorage.getItem("conso_elec_an")
+	let conso_gaz_an = localStorage.getItem("conso_gaz_an")
+	let conso_serres = localStorage.getItem("conso_serres")
+	let serre_non_chauffee = localStorage.getItem("serre_non_chauffee")
+	let haie = localStorage.getItem("haie")
+	let foret= localStorage.getItem("foret")
+	let vehicule= localStorage.getItem("vehicule")
+	let livraison= localStorage.getItem("livraison")
+	let S_serre = localStorage.getItem("S_serre")
+	let nbr_legume= localStorage.getItem("nbr_legume")
+	let S_bache = localStorage.getItem("S_bache")
+	let nbr_outils= localStorage.getItem("nbr_outils")
+	let nbr_phyto= localStorage.getItem("nbr_phyto")
+
+	/** à changer / optimiser */
+	const nbr_vehicule = 1
+	const nbr_livraison = 1
+	/** à changer / optimiser */
+	
+
+	
 
 
 
 
 
-// To Store in local storage the text inputs
-const textInputs = document.querySelectorAll('input[type="text"]');
+function calculFerme(conso_elec_an, conso_gaz_an, serre_chauffee, haie, foret, nbr_vehicule, nbr_livraison) {
+	vehicule_liste.push(vehicule.toUpperCase());
+	livraison_liste.push(livraison.toUpperCase());
 
-// Add an event listener to each text input element
-textInputs.forEach(input => {
-  input.addEventListener('input', () => {
-    // Get the input name and value
-    const inputName = input.getAttribute('name');
-    const inputValue = input.value;
+  	let EM_elec = FE_elec * parseFloat(conso_elec_an);
+  	let EM_gaz = FE_gaz * parseFloat(conso_gaz_an);
+  	let emission_serre = (serre_chauffee ? val_serre_chauffee : 0);
+  	let EM_prod_fabrication = (vehicule_liste.includes("TRACTEUR") ? val_tracteur : 0); // ajouter les autres valeurs en imitant la même méthode
+  	let EM_prod_livraison = (livraison_liste.includes("KANGOO") ? val_kangoo : 0); // ajouter les autres valeurs en imitant la même méthode
+  	let captage_haie = (haie ? val_haie : 0);
+  	let captage_foret = (foret ? val_foret : 0);
+  	let total_ferme = EM_elec + EM_gaz + EM_prod_fabrication + EM_prod_livraison + captage_haie + captage_foret;
+	
+	  
+  	return total_ferme;
+}
 
-    // Store the input value in local storage using the input name as the key
-    localStorage.setItem(inputName, inputValue);
+var result_total_ferme = calculFerme(conso_elec_an, conso_gaz_an, serre_chauffee, haie, foret, nbr_vehicule, nbr_livraison);
+
+
+	let legume1 = JSON.parse(localStorage.getItem('Tomate-values'));
+	let S_legume1 = legume1[0];
+	// let S_serre_chauffee_legume1 = legume1[1];
+	// let S_serre_non_chauffee_legume1 = legume1[2];
+	let S_bache_legume1 = legume1[3];
+
+	let legume2 = JSON.parse(localStorage.getItem('Pomme de Terre-values'));
+	let S_legume2 = legume2[0];
+	// let S_serre_chauffee_legume1 = legume1[1];
+	// let S_serre_non_chauffee_legume1 = legume1[2];
+	let S_bache_legume2 = legume2[3];
+
+	/** 
+	for (let i = 0; i < localStorage.length; i++) {
+		let key1 = localStorage.key(i);
+		if (localStorage.getItem(key1) === 'Tomate-values') {
+			let legume1_name = "Tomate";
+			legume_liste.push(legume1_name.toUpperCase());
+			break;
+		}
+	}
+
+	for (let i = 0; i < localStorage.length; i++) {
+		let key2 = localStorage.key(i);
+		if (localStorage.getItem(key2) === 'Pomme de Terre-values') {
+			let legume2_name = "Pommes de Terre";
+			legume_liste.push(legume2_name.toUpperCase());
+			break;
+		}
+	}
+	*/
+
+	legume_liste.push("TOMATE")
+	legume_liste.push("POMMES DE TERRE")
+	surface_liste.push(parseFloat(S_legume1));
+	surface_liste.push(parseFloat(S_legume2));
+	let EM_serre = parseFloat(S_serre) * FE_serre_an / Amort_serre_an;
+
+	
+
+	function EMSerre(S_serre, nbr_legume, EM_serre_legume) {
+		for (let i = 0; i < parseInt(nbr_legume); i++) {
+			let CR_serre_legume = parseFloat(surface_liste[i]) / parseFloat(S_serre);
+	  		CR_serre.push(CR_serre_legume);
+	  		let EM_par_legume = EM_serre * CR_serre[i];
+	  		EM_serre_legume.push(EM_par_legume);
+	}
+	console.log(`L'émission carbone de la serre pour ${legume_liste[0]} donne ${EM_serre_legume[0]} kgeqCO2. \nCelle pour ${legume_liste[1]} donne ${EM_serre_legume[1]} kgeqCO2.`)
+	return EM_serre_legume
+	}
+
+
+	var_EMSerre = EMSerre(S_serre, nbr_legume, EM_serre_legume);
+	  
+
+
+	s_bache_liste.push(parseFloat(S_bache_legume1));
+	s_bache_liste.push(parseFloat(S_bache_legume2));
+	let EM_bache = parseFloat(S_bache) * FE_bache_an / Amort_bache_an;
+
+
+  function EMBache(S_bache, nbr_legume, EM_bache_legume) {
+	for (let i = 0; i < parseInt(nbr_legume); i++) {
+	  let CR_bache_legume = parseFloat(s_bache_liste[i]) / parseFloat(S_bache);
+	  CR_bache.push(CR_bache_legume);
+	  let EM_bache_par_legume = EM_bache * CR_bache[i];
+	  EM_bache_legume.push(EM_bache_par_legume);
+	}
+	console.log(`L'émission carbone de la bâche pour ${legume_liste[0]} donne ${EM_bache_legume[0]} kgeqCO2. \nCelle pour ${legume_liste[1]} donne ${EM_bache_legume[1]} kgeqCO2. `);
+	return EM_bache_legume;
+  }
+
+  var_EMBache = EMBache(S_bache, nbr_legume, EM_bache_legume);
+
+
+
+  function EMOutils(nbr_outils, nbr_legume) {
+	for (let i = 0; i < parseInt(nbr_outils); i++) {
+	  let outil = prompt("Entrer le nom de l'outil: ");
+	  outils_liste.push(outil);
+	  let duree_outil = prompt("Entrer la durée d'utilisation de l'outil (en h) : ");
+	  duree_outils_liste.push(parseFloat(duree_outil));
+	  let conso_outil = prompt("Entrer la consommation (en L/h) de l'outil : ");
+	  conso_outils_liste.push(parseFloat(conso_outil));
+	}
+  
+	for (let i = 0; i < parseInt(nbr_outils); i++) {
+	  let EM_outil = conso_outils_liste[i] * gazole * emission_gazole * parseFloat(duree_outils_liste[i]);
+	  EM_outils.push(EM_outil);
+  
+	  for (let j = 0; j < parseInt(nbr_legume); j++) {
+		let Ttot_outil_legume = prompt(`Entrer la durée d'utilisation (en h) de l'outil sur le légume ${j+1}`);
+		Ttot_outil_liste.push(parseFloat(Ttot_outil_legume));
+  
+		let CR_outil = Ttot_outil_liste[j+2*i] / duree_outils_liste[i];
+		CR_outil_liste.push(parseFloat(CR_outil));
+	  }
+	}
+  
+	let EM_herse_legume1 = EM_outils[0] * CR_outil_liste[0];
+	let EM_herse_legume2 = EM_outils[0] * CR_outil_liste[1];
+	let EM_broyeur_legume1 = EM_outils[1] * CR_outil_liste[2];
+	let EM_broyeur_legume2 = EM_outils[1] * CR_outil_liste[3];
+  
+	console.log(`L'émission carbone pour ${outils_liste[0]} avec ${legume_liste[0]} donne ${EM_herse_legume1} kgeqCO2. Et avec ${legume_liste[1]} on a ${EM_herse_legume2} kgeqCO2. \nL'émission carbone pour ${outils_liste[1]} avec ${legume_liste[0]} donne ${EM_broyeur_legume1} kgeqCO2. Et avec ${legume_liste[1]} on a ${EM_broyeur_legume2} kgeqCO2.`);
+  }
+
+  
+  
+
+
+  function displayRes(result_total_ferme){
+	console.log(result_total_ferme);
+	console.log(var_EMSerre);
+	console.log(var_EM_bache_legume)
+
+  }
+  
+  
+
+
+;
+
+send_form_btn.addEventListener('click', () => {
+	console.log('Send form button clicked');
+	// Add code here @Puch
   });
-});
-
-// Get all clickable-label elements on the page
-const radios = document.querySelectorAll('.clickable-label');
-
-// Add an event listener to each clickable-label element
-radios.forEach(label => {
-  label.addEventListener('click', () => {
-    // Check if the label has the "active" class
-    if (label.classList.contains('active')) {
-      // Get the label name and value
-      const labelName = label.getAttribute('name');
-      const labelValue = label.innerText;
-
-      // Store the label value in local storage using the label name as the key
-      localStorage.setItem(labelName, labelValue);
-
-      // Get the corresponding radio input element
-      const radioInput = document.querySelector(`input[type="radio"][name="${labelName}"]`);
-
-      // If a radio input element exists, store its value in local storage using the same key as the label
-      if (radioInput) {
-        const radioValue = radioInput.value;
-        localStorage.setItem(labelName, radioValue);
-      }
-    }
-  });
-});
+  
