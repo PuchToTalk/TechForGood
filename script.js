@@ -603,10 +603,12 @@ document.addEventListener("DOMContentLoaded", function() {
   
 	  localStorage.setItem("S_serre", document.querySelector('#S_serre').value);
 	  localStorage.setItem("nbr_legume", document.querySelector('#nbr_legume').value);
-  
-		localStorage.setItem("S_bache", document.querySelector('#S_bache').value);
+
+	  localStorage.setItem("S_bache", document.querySelector('#S_bache').value);
 	  localStorage.setItem("nbr_outils", document.querySelector('#nbr_outils').value);
 	  localStorage.setItem("nbr_phyto", document.querySelector('#nbr_phyto').value);
+
+	  localStorage.setItem("conso_livraison", document.querySelector('#conso_livraison').value);
   
 	  
   
@@ -627,6 +629,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	  let S_bache = localStorage.getItem("S_bache")
 	  let nbr_outils = localStorage.getItem("nbr_outils")
 	  let nbr_phyto = localStorage.getItem("nbr_phyto")
+	  let conso_livraison = localStorage.getItem("conso_livraison")
   
 	  /** à changer / optimiser */
 	  const nbr_vehicule = 1
@@ -639,10 +642,17 @@ document.addEventListener("DOMContentLoaded", function() {
   
   
   
-  function calculFerme(conso_elec_an, conso_gaz_an, serre_chauffee, haie, foret, nbr_vehicule, nbr_livraison) {
-	  vehicule_liste.push(vehicule.toUpperCase());
-	  livraison_liste.push(livraison.toUpperCase());
   
+  
+  
+  
+  
+  
+  send_form_btn.addEventListener('click', () => {
+
+	function calculFerme(conso_elec_an, conso_gaz_an, serre_chauffee, haie, foret, nbr_vehicule, nbr_livraison) {
+		vehicule_liste.push(vehicule.toUpperCase());
+		livraison_liste.push(livraison.toUpperCase());
 		let EM_elec = FE_elec * parseFloat(conso_elec_an);
 		let EM_gaz = FE_gaz * parseFloat(conso_gaz_an);
 		let emission_serre = (serre_chauffee ? val_serre_chauffee : 0);
@@ -651,28 +661,21 @@ document.addEventListener("DOMContentLoaded", function() {
 		let captage_haie = (haie ? val_haie : 0);
 		let captage_foret = (foret ? val_foret : 0);
 		let total_ferme = EM_elec + EM_gaz + EM_prod_fabrication + EM_prod_livraison + captage_haie + captage_foret;
-	  
-		
+		console.log(`Le total émission carbone de la ferme donne ${total_ferme} kgeqCO2.`)
 		return total_ferme;
-  }
-  
-  var result_total_ferme = calculFerme(conso_elec_an, conso_gaz_an, serre_chauffee, haie, foret, nbr_vehicule, nbr_livraison);
-  
-  
-  
-  
-  
-  send_form_btn.addEventListener('click', () => {
-	  console.log('Send pressed');
+	}
+	
+	var result_total_ferme = calculFerme(conso_elec_an, conso_gaz_an, serre_chauffee, haie, foret, nbr_vehicule, nbr_livraison);
+
   
 	  let legume1 = JSON.parse(localStorage.getItem('Tomate-values'));
-	  let S_legume1 = legume1[0];
+	  let S_legume1 = legume1[2];
 		  // let S_serre_chauffee_legume1 = legume1[1];
 		  // let S_serre_non_chauffee_legume1 = legume1[2];
 	  let S_bache_legume1 = legume1[3];
   
 	  let legume2 = JSON.parse(localStorage.getItem('Pomme de Terre-values'));
-	  let S_legume2 = legume2[0];
+	  let S_legume2 = legume2[2];
 		  // let S_serre_chauffee_legume1 = legume1[1];
 		  // let S_serre_non_chauffee_legume1 = legume1[2];
 	  let S_bache_legume2 = legume2[3];
@@ -754,12 +757,12 @@ document.addEventListener("DOMContentLoaded", function() {
   
 	  conso_outils_liste.push(parseFloat(conso_outil1));
 	  conso_outils_liste.push(parseFloat(conso_outil2));
-	  console.log(conso_outils_liste);
+
   
   
 	  // DUREE OUTIL TOTAL
   
-	  let duree_outil1 =  legume1[5] +  legume2[5] // DUREE TOTALE HERSE
+	  let duree_outil1 = legume1[5] + legume2[5] // DUREE TOTALE HERSE
 	  let duree_outil2 = legume2[4] + legume2[4] // DUREE TOTALE BROYEUSE
 	  duree_outils_liste.push(duree_outil1, duree_outil2);
 	
@@ -784,8 +787,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		  let EM_broyeur_legume1 = EM_outils[1] * CR_outil_liste[2];
 		  let EM_broyeur_legume2 = EM_outils[1] * CR_outil_liste[3];
 	
-		  console.log(EM_outils)
-		  console.log(CR_outil_liste)
+
 
 
 
@@ -793,8 +795,65 @@ document.addEventListener("DOMContentLoaded", function() {
 		  return EM_herse_legume1
 	  }
 	  
+	  
 	  var_EMOutils = EMOutils(nbr_outils, nbr_legume, conso_outils_liste, duree_outils_liste, Ttot_outil_liste, CR_outil_liste);
-  });
+
+	  const nbr_phyto = 1; // à généraliser selon le nbre de phyto défini dans la page 3
+	  for (let i = 0; i < nbr_phyto; i++) {
+		let phyto1 = "WHISPER"; // à généraliser avec la page 3
+		liste_phyto.push(phyto1.toUpperCase());
+	}
+
+
+	  let qtite_phyto_legume1 = legume1[6];
+	  let qtite_phyto_legume2 = legume2[6];
+	  valeur_phyto.push(parseFloat(qtite_phyto_legume1));
+	  valeur_phyto.push(parseFloat(qtite_phyto_legume2));
+	  
+
+	  function EMPhyto(nbr_phyto, nbr_legume, valeur_phyto, liste_phyto, legume_liste) {
+		for (let y = 0; y < nbr_phyto; y++) {
+			for (let z = 0; z < nbr_legume; z++) {
+				let EM_phyto = valeur_phyto[z] * val_whisper;
+				EM_phyto_liste.push(EM_phyto);
+				console.log(`L'émission carbone pour le phyto : ${liste_phyto[y]} avec le légume ${legume_liste[z]} donne ${EM_phyto_liste[z]} kgeqCO2.\n`);
+			}
+		}
+	}
+
+	var_EMPhyto = EMPhyto(nbr_phyto, nbr_legume, valeur_phyto, liste_phyto, legume_liste);
+
+
+
+
+	function EMLivraison(livraison, conso_livraison, conso_livraison_liste, Mprod_liste, EM_livraison_liste, nbr_livraison, nbr_legume, CR_livraison_liste, legume_liste, livraison_liste) {
+		let conso_livraison2 = conso_livraison;
+		conso_livraison_liste.push(parseFloat(conso_livraison2));
+		EM_livraison_liste = [];
+		let Mprod_legume1 = legume1[2];
+		let Mprod_legume2 = legume2[2];
+		Mprod_liste.push(parseFloat(Mprod_legume1));
+		Mprod_liste.push(parseFloat(Mprod_legume2));
+		let EM_livraison = conso_livraison_liste[0] * gazole * emission_gazole;
+		EM_livraison_liste.push(EM_livraison);
+		for (let i = 0; i < nbr_legume; i++) {
+			let CR_livraison = Mprod_liste[i] / (Mprod_liste[0] + Mprod_liste[1]); // à généraliser pour + de 2 légumes
+			CR_livraison_liste.push(CR_livraison);
+			let EM_legume = EM_livraison_liste[0] * CR_livraison_liste[i];
+			EM_legume_liste.push(EM_legume);
+			console.log(" --- ");
+			console.log(`L'émission carbone pour le légume: ${legume_liste[i]} avec le véhicule de livraison : ${livraison} donne un total de :  ${EM_legume_liste[i]} kgeqCO2. \n`);
+		}
+	}
+
+	var_EMLivraison = EMLivraison(livraison, conso_livraison_liste, Mprod_liste, EM_livraison_liste, nbr_livraison, nbr_legume, CR_livraison_liste, legume_liste);
+	  
+
+
+
+
+
+})
   
   function displayRes(result_total_ferme){
 	  console.log(result_total_ferme);
