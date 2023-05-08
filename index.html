@@ -285,14 +285,14 @@
                                 <label for="" class="question-labels">Utilisez vous un ou plusieurs véhicule de livraison ? Entrer le nom du véhicule de livraison:</label>
                                 <div class="radio-options">
                                     <li>
-                                        <input type="radio" name="baches-de-cultures">
+                                        <input type="radio" name="bache-de-cultures">
                                         <label for="" class="clickable-label">Oui</label>
                                         <div class="radio-check">
                                             <div class="radio-check-inside"></div>
                                         </div>
                                     </li>
                                     <li>
-                                        <input type="radio" name="baches-de-cultures">
+                                        <input type="radio" name="bache-de-cultures">
                                         <label for="" class="clickable-label">Non</label>
                                         <div class="radio-check">
                                             <div class="radio-check-inside"></div>
@@ -342,12 +342,12 @@
                             </ul>
                             
                             <div class="input-wrap">
-                                <label for="livraison" class="question-labels">Comment livrez-vous vos clients?</label>
-                                <input type="text" name="livraison" class="question-inputs" id="livraison" placeholder="Ex: Camion / vehicule léger / Pas de livraison">
+                                <label for="livraison" class="question-labels">Entrer la consommation du véhicule de livraison sur cette saison (en L) :</label>
+                                <input type="text" name="livraison" class="question-inputs" id="conso_livraison" placeholder="200">
                             </div>
                             <div class="form-btns">
                                 <div class="common-btns form_1_btns active">
-                                    <button type="button" class="button btn_next" onclick="calculFerme(conso_elec_an, conso_gaz_an, serre_chauffee, haie, foret, nbr_vehicule, nbr_livraison)">Continuer
+                                    <button type="button" class="button btn_next" >Continuer
                                         <span class="icon">
                                             <i class="uil uil-arrow-right"></i>
                                         </span>
@@ -11391,9 +11391,9 @@
                                 <thead>
                                     <tr>
                                         <th>Légume</th>
-                                        <th>Surface Concernée (m²)</th>
-                                        <th>Sous Serre Chauffée</th>
-                                        <th>Sous Serre Non-Chauffée</th>
+                                        <th>Quantitée récoltée visée (en kg)</th>
+                                        <th>Sous Serre Chauffée (m²)</th>
+                                        <th>Sous Serre Non-Chauffée (m²)</th>
                                         <th>Avec Bâche de Culture</th>
                                     </tr>
                                 </thead>
