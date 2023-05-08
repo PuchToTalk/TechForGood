@@ -566,8 +566,8 @@ document.addEventListener("DOMContentLoaded", function() {
   
   const conso_livraison_liste = [];
   const Mprod_liste = [];
-  const EM_livraison_liste = [];
-  const CR_livraison_liste = [];
+  let EM_livraison_liste = [];
+  let CR_livraison_liste = [];
   const EM_legume_liste = [];
   
   const EM_ferme_legume_liste = [];
@@ -715,6 +715,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			  let EM_par_legume = EM_serre * CR_serre[i];
 			  EM_serre_legume.push(EM_par_legume);
 		  }
+		  console.log(" --- ");
 		  console.log(`L'émission carbone de la serre pour ${legume_liste[0]} donne ${EM_serre_legume[0]} kgeqCO2. \nCelle pour ${legume_liste[1]} donne ${EM_serre_legume[1]} kgeqCO2.`)
 		  return EM_serre_legume
 		  }
@@ -736,6 +737,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			  let EM_bache_par_legume = EM_bache * CR_bache[i];
 			  EM_bache_legume.push(EM_bache_par_legume);
 		  }
+		  console.log(" --- ");
 		  console.log(`L'émission carbone de la bâche pour ${legume_liste[0]} donne ${EM_bache_legume[0]} kgeqCO2. \nCelle pour ${legume_liste[1]} donne ${EM_bache_legume[1]} kgeqCO2. `);
 		  return EM_bache_legume;
 	  }
@@ -786,17 +788,20 @@ document.addEventListener("DOMContentLoaded", function() {
 		  let EM_herse_legume2 = EM_outils[0] * CR_outil_liste[1];
 		  let EM_broyeur_legume1 = EM_outils[1] * CR_outil_liste[2];
 		  let EM_broyeur_legume2 = EM_outils[1] * CR_outil_liste[3];
+		  localStorage.setItem('EM_herse_legume1', EM_herse_legume1);
+		  localStorage.setItem('EM_herse_legume2', EM_herse_legume2);
+		  localStorage.setItem('EM_broyeur_legume1', EM_broyeur_legume1);
+		  localStorage.setItem('EM_broyeur_legume2', EM_broyeur_legume2);
 	
-
-
-
-
+		  console.log(" --- ");
 		  console.log(`L'émission carbone pour ${outils_liste[0]} avec ${legume_liste[0]} donne ${EM_herse_legume1} kgeqCO2. Et avec ${legume_liste[1]} on a ${EM_herse_legume2} kgeqCO2. \nL'émission carbone pour ${outils_liste[1]} avec ${legume_liste[0]} donne ${EM_broyeur_legume1} kgeqCO2. Et avec ${legume_liste[1]} on a ${EM_broyeur_legume2} kgeqCO2.`);
 		  return EM_herse_legume1
 	  }
-	  
-	  
+
 	  var_EMOutils = EMOutils(nbr_outils, nbr_legume, conso_outils_liste, duree_outils_liste, Ttot_outil_liste, CR_outil_liste);
+
+
+
 
 	  const nbr_phyto = 1; // à généraliser selon le nbre de phyto défini dans la page 3
 	  for (let i = 0; i < nbr_phyto; i++) {
@@ -809,47 +814,103 @@ document.addEventListener("DOMContentLoaded", function() {
 	  let qtite_phyto_legume2 = legume2[6];
 	  valeur_phyto.push(parseFloat(qtite_phyto_legume1));
 	  valeur_phyto.push(parseFloat(qtite_phyto_legume2));
-	  
 
 	  function EMPhyto(nbr_phyto, nbr_legume, valeur_phyto, liste_phyto, legume_liste) {
 		for (let y = 0; y < nbr_phyto; y++) {
 			for (let z = 0; z < nbr_legume; z++) {
 				let EM_phyto = valeur_phyto[z] * val_whisper;
 				EM_phyto_liste.push(EM_phyto);
+				console.log(" --- ");
 				console.log(`L'émission carbone pour le phyto : ${liste_phyto[y]} avec le légume ${legume_liste[z]} donne ${EM_phyto_liste[z]} kgeqCO2.\n`);
 			}
 		}
+		return EM_phyto_liste
 	}
+	
 
-	var_EMPhyto = EMPhyto(nbr_phyto, nbr_legume, valeur_phyto, liste_phyto, legume_liste);
+		var_EMPhyto = EMPhyto(nbr_phyto, nbr_legume, valeur_phyto, liste_phyto, legume_liste);
 
-
-
-
-	function EMLivraison(livraison, conso_livraison, conso_livraison_liste, Mprod_liste, EM_livraison_liste, nbr_livraison, nbr_legume, CR_livraison_liste, legume_liste, livraison_liste) {
 		let conso_livraison2 = conso_livraison;
 		conso_livraison_liste.push(parseFloat(conso_livraison2));
-		EM_livraison_liste = [];
-		let Mprod_legume1 = legume1[2];
-		let Mprod_legume2 = legume2[2];
+		
+		
+
+
+		
+
+
+	  function EMLivraison(result_total_ferme, livraison, conso_livraison_liste, Mprod_liste, nbr_livraison, nbr_legume, legume_liste, livraison_liste) {
+		let EM_livraison_liste = [];
+		let CR_livraison_liste = [];
+		let Mprod_legume1 = legume1[0];
+		let Mprod_legume2 = legume2[0];
 		Mprod_liste.push(parseFloat(Mprod_legume1));
 		Mprod_liste.push(parseFloat(Mprod_legume2));
 		let EM_livraison = conso_livraison_liste[0] * gazole * emission_gazole;
 		EM_livraison_liste.push(EM_livraison);
-		for (let i = 0; i < nbr_legume; i++) {
-			let CR_livraison = Mprod_liste[i] / (Mprod_liste[0] + Mprod_liste[1]); // à généraliser pour + de 2 légumes
-			CR_livraison_liste.push(CR_livraison);
-			let EM_legume = EM_livraison_liste[0] * CR_livraison_liste[i];
-			EM_legume_liste.push(EM_legume);
+		let CR_livraison1 = Mprod_liste[0] / (Mprod_liste[0] + Mprod_liste[1]); // à généraliser pour + de 2 légumes
+		let CR_livraison2 = Mprod_liste[1] / (Mprod_liste[0] + Mprod_liste[1]);
+		CR_livraison_liste.push(parseFloat(CR_livraison1));
+		CR_livraison_liste.push(parseFloat(CR_livraison2));
+		let EM_legume1 = EM_livraison_liste[0] * CR_livraison_liste[0];
+		let EM_legume2 = EM_livraison_liste[0] * CR_livraison_liste[1];
+		EM_legume_liste.push(EM_legume1);
+		EM_legume_liste.push(EM_legume2);
+		let EM_ferme_legume1 = result_total_ferme * CR_livraison_liste[0];
+		let EM_ferme_legume2 = result_total_ferme * CR_livraison_liste[1];
+		EM_ferme_legume_liste.push(EM_ferme_legume1);
+		EM_ferme_legume_liste.push(EM_ferme_legume2);
+		for (let q = 0; q < nbr_legume; q++) {
 			console.log(" --- ");
-			console.log(`L'émission carbone pour le légume: ${legume_liste[i]} avec le véhicule de livraison : ${livraison} donne un total de :  ${EM_legume_liste[i]} kgeqCO2. \n`);
+			console.log(`L'émission carbone pour le légume: ${legume_liste[q]} avec le véhicule de livraison : ${livraison.toUpperCase()} donne un total de :  ${EM_legume_liste[q]} kgeqCO2. \n`);
+			console.log(`L'émission carbone de la ferme pour le légume : ${legume_liste[q]} donne un total de :  ${EM_ferme_legume_liste[q]} kgeqCO2. \n`);
+		}
+		return EM_ferme_legume_liste
+	}
+
+	
+	
+	
+		var_EMLivraison = EMLivraison(result_total_ferme, livraison, conso_livraison_liste, Mprod_liste, nbr_livraison, nbr_legume, legume_liste, livraison_liste);
+		
+		let EM_herse_legume1 = localStorage.getItem('EM_herse_legume1');
+		let EM_herse_legume2 = localStorage.getItem('EM_herse_legume2');
+		let EM_broyeur_legume1 = localStorage.getItem('EM_broyeur_legume1');
+		let EM_broyeur_legume2 = localStorage.getItem('EM_broyeur_legume2');
+		
+
+
+
+
+
+	  function EMLegume(nbr_legume) {
+		let EM_herse_legume1 = localStorage.getItem('EM_herse_legume1');
+		let EM_herse_legume2 = localStorage.getItem('EM_herse_legume2');
+		let EM_broyeur_legume1 = localStorage.getItem('EM_broyeur_legume1');
+		let EM_broyeur_legume2 = localStorage.getItem('EM_broyeur_legume2');
+		let EM_legume_total_liste = [];
+		
+		for (let i = 0; i < parseInt(nbr_legume); i++) {
+			if (legume_liste[i] === "TOMATE") {
+				let EM_legume_total1 = parseFloat(EM_serre_legume[i]) + parseFloat(EM_bache_legume[i]) + parseFloat(EM_herse_legume1) + parseFloat(EM_broyeur_legume1) + parseFloat(EM_phyto_liste[i]) + parseFloat(EM_legume_liste[i]) + parseFloat(EM_ferme_legume_liste[i]);
+				EM_legume_total_liste.push(EM_legume_total1);
+				let EM_final1 = EM_legume_total_liste[i] / Mprod_liste[i];
+	  			EM_final_legume.push(parseFloat(EM_final1));
+
+			} else if (legume_liste[i] === "POMMES DE TERRE") {
+				let EM_legume_total2 = parseFloat(EM_serre_legume[i]) + parseFloat(EM_bache_legume[i]) + parseFloat(EM_herse_legume2) + parseFloat(EM_broyeur_legume2) + parseFloat(EM_phyto_liste[i]) + parseFloat(EM_legume_liste[i]) + parseFloat(EM_ferme_legume_liste[i]);
+				EM_legume_total_liste.push(EM_legume_total2);
+				let EM_final2 = EM_legume_total_liste[i] / Mprod_liste[i];
+	  			EM_final_legume.push(parseFloat(EM_final2));
+			}
+			console.log(" --- ");
+			console.log(`L'émission carbone de la ferme pour le légume : ${legume_liste[i]} donne un total de :  ${EM_legume_total_liste[i]} kgeqCO2. \n`);
+			console.log(`L'émission carbone après répartition de la quantité récoltée donne :  ${EM_final_legume[i]} kgeqCO2 / kg de : ${legume_liste[i]}. \n`);
 		}
 	}
 
-	var_EMLivraison = EMLivraison(livraison, conso_livraison_liste, Mprod_liste, EM_livraison_liste, nbr_livraison, nbr_legume, CR_livraison_liste, legume_liste);
+	  var_EMLegume = EMLegume(nbr_legume);
 	  
-
-
 
 
 
@@ -859,4 +920,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	  console.log(result_total_ferme);
 	  console.log(var_EMSerre);
 	  console.log(var_EM_bache_legume)
+	  console.log(var_EMPhyto)
+	  console.log(var_EMLivraison)
+	  console.log(var_EMLegume)
   };
