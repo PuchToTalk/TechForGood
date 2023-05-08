@@ -3,7 +3,7 @@
 
 # Tickarbone - Carboleg
 
-## ENG 🇺🇸🏴󠁧󠁢󠁥󠁮󠁧󠁿!
+## ENG 🇺🇸🏴󠁧󠁢󠁥󠁮󠁧󠁿
 
 Tech for Good unit course at ISEP in engineering cycle.
 
