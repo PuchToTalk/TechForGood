@@ -1,4 +1,4 @@
-![favicon](https://github.com/PuchToTalk/Tickarbone/assets/90144938/2d624e86-efba-470e-a656-780fdcc4474f)
+![carboleg-logo](https://github.com/PuchToTalk/Tickarbone/assets/90144938/aade342b-9c01-451c-ac52-f8af96174cf1)
 
 
 # TechforGood
