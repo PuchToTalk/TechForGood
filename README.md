@@ -1,7 +1,7 @@
-![carboleg_logo-removebg-preview](https://user-images.githubusercontent.com/90144938/236798886-192daa3c-23d6-40f0-aaff-c5a071859fe0.png)
+![favicon](https://github.com/PuchToTalk/Tickarbone/assets/90144938/2d624e86-efba-470e-a656-780fdcc4474f)
 
 
-# Tickarbone - Carboleg
+# TechforGood
 
 ## ENG 🇺🇸🏴󠁧󠁢󠁥󠁮󠁧󠁿
 
