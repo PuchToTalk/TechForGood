@@ -385,7 +385,7 @@ document.addEventListener("DOMContentLoaded", function() {
   
   
   
-  
+  // A VERIFIER IMPERATIVEMENT
   document.addEventListener('DOMContentLoaded', () => {
 	const dropdown = document.querySelector('.dropdown');
 	const dropdownItems = dropdown.querySelectorAll('.dropdown-item');
@@ -909,9 +909,11 @@ document.addEventListener("DOMContentLoaded", function() {
 		}
 	}
 
-	  var_EMLegume = EMLegume(nbr_legume);
+	var_EMLegume = EMLegume(nbr_legume);
 	  
-
+	document.getElementById("result-total").textContent = result_total_ferme;
+	document.getElementById("result-pomme-de-terre").textContent = EM_final_legume[1];
+	document.getElementById("result-tomate").textContent = EM_final_legume[0];
 
 
 })
